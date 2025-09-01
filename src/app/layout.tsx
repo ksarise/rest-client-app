@@ -32,7 +32,6 @@ export default function RootLayout({
       <head>
         <title>REST Client App</title>
       </head>
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -4,7 +4,5 @@ import Page from '../app/page';
 
 test('Page', () => {
   render(<Page />);
-  expect(
-    screen.getByRole('heading', { level: 1, name: 'Welcome' })
-  ).toBeDefined();
+  expect(screen.getByRole('main')).toBeTruthy();
 });

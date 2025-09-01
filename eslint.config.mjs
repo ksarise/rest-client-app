@@ -1,43 +1,76 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import js from '@eslint/js';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import nextPlugin from '@next/eslint-plugin-next';
 import reactHooks from 'eslint-plugin-react-hooks';
 import react from 'eslint-plugin-react';
-import tseslint from 'typescript-eslint';
-import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
-import reactCompiler from 'eslint-plugin-react-compiler';
-import next from '@next/eslint-plugin-next';
+import importPlugin from 'eslint-plugin-import';
+import unicorn from 'eslint-plugin-unicorn';
+import perfectionist from 'eslint-plugin-perfectionist';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', 'coverage', '.next', '*.d.ts'],
-  },
-  {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.strict,
-      eslintPluginPrettier,
+    ignores: [
+      '**/node_modules/**',
+      '.next/**',
+      '__content/**',
+      'coverage/**',
+      '**/*.config.js',
+      '**/*.d.ts',
+      'dist/**',
     ],
-    files: ['**/*.{ts,tsx, test.ts, test.tsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
+  },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {
-      react,
+      '@next/next': nextPlugin,
       'react-hooks': reactHooks,
-      'react-compiler': reactCompiler,
-      next,
+      react: react,
+      import: importPlugin,
+      unicorn: unicorn,
+      perfectionist: perfectionist,
+    },
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: __dirname,
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-compiler/react-compiler': 'error',
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
-      validateLineBreaks: 'off',
+      '@next/next/no-img-element': 'error',
+      '@next/next/no-page-custom-font': 'error',
+      '@next/next/no-unwanted-polyfillio': 'error',
+      '@next/next/no-before-interactive-script-outside-document': 'error',
+      '@next/next/no-css-tags': 'error',
+      '@next/next/no-head-element': 'error',
+      '@next/next/no-html-link-for-pages': 'error',
+      '@next/next/no-script-component-in-head': 'error',
+      '@next/next/no-styled-jsx-in-document': 'error',
+      '@next/next/no-sync-scripts': 'error',
+      '@next/next/no-title-in-document-head': 'error',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'off',
+      'comma-dangle': ['error', 'only-multiline'],
+      'import/no-unresolved': 'off',
     },
     settings: {
       react: {
         version: 'detect',
+      },
+      next: {
+        rootDir: __dirname,
       },
     },
   }

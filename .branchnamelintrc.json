@@ -15,7 +15,8 @@
       "features": "feat",
       "feature": "feat",
       "hotfix": "fix",
-      "releases": "release"
+      "releases": "release",
+      "chor": "chore"
     },
     "banned": ["wip"],
     "skip": ["skip-ci"],

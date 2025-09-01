@@ -1,2 +1,2 @@
-npx branch-name-lint .branchnamelintrc.json --branch feature/set
+npx branch-name-lint .branchnamelintrc.json
 npx vitest run --coverage

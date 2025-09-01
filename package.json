@@ -10,7 +10,7 @@
     "prepare": "husky",
     "sort": "npx sort-package-json",
     "start": "next start",
-    "test": "vitest",
+    "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {

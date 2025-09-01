@@ -9,6 +9,7 @@ import react from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
 import unicorn from 'eslint-plugin-unicorn';
 import perfectionist from 'eslint-plugin-perfectionist';
+import next from '@next/eslint-plugin-next';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -31,6 +32,7 @@ export default tseslint.config(
     files: ['**/*.{ts,tsx,js,jsx}'],
     plugins: {
       '@next/next': nextPlugin,
+      next,
       'react-hooks': reactHooks,
       react: react,
       import: importPlugin,

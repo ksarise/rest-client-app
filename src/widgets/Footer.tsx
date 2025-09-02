@@ -3,7 +3,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="bg-base-300 flex items-end p-7 pt-0">
+    <footer className="bg-base-300 flex flex-wrap items-end justify-center gap-3 p-7 pt-0 md:flex-nowrap">
       <nav className="text-center">
         <a
           href="https://github.com/ksarise/rest-client-app"
@@ -38,7 +38,7 @@ function Footer() {
           />
         </a>
       </nav>
-      <p className="w-full text-end">
+      <p className="w-full text-center md:text-end">
         Copyright © {new Date().getFullYear()} - All right reserved
       </p>
     </footer>

@@ -4,7 +4,7 @@ import React from 'react';
 
 function Header() {
   return (
-    <header className="text-neutral-content sticky top-0 z-2 flex flex-wrap items-center justify-center gap-3 bg-sky-950 p-3 md:flex-nowrap md:justify-between">
+    <header className="text-neutral-content sticky top-0 z-2 flex flex-wrap items-center justify-center gap-3 bg-transparent p-3 backdrop-blur-md transition-colors duration-300 md:flex-nowrap md:justify-between">
       <div className="w-50 text-center text-xl">
         <Link
           href="/"

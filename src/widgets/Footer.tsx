@@ -3,7 +3,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="bg-base-300 flex flex-wrap items-end justify-center gap-3 p-7 pt-0 md:flex-nowrap">
+    <footer className="bg-base-400 flex flex-wrap items-end justify-center gap-3 p-7 pt-0 md:flex-nowrap">
       <nav className="text-center">
         <a
           href="https://github.com/ksarise/rest-client-app"

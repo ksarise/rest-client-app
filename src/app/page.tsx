@@ -2,7 +2,7 @@ import ProfileCard from '@/widgets/ProfileCard';
 
 export default function Page() {
   return (
-    <main className="hero bg-base-200 min-h-screen">
+    <main className="hero bg-base-300 min-h-screen">
       <div className="p-3 md:p-10">
         <h1 className="mb-4 text-center text-2xl">Hi! This is our team</h1>
         <div className="m-auto text-center md:w-1/2">

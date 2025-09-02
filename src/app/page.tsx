@@ -1,5 +1,3 @@
-// import Image from 'next/image';
-
 import ProfileCard from '@/widgets/ProfileCard';
 
 export default function Page() {

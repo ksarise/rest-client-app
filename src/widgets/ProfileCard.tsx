@@ -11,7 +11,7 @@ interface Props {
 function ProfileCard({ img, description, title, gitHub }: Props) {
   return (
     <a href={gitHub} target="_blank" className="profile-card">
-      <div className="card bg-base-100 w-96 shadow-sm">
+      <div className="card bg-base-100 w-70 shadow-sm md:w-96">
         <figure>
           <Image
             priority={true}

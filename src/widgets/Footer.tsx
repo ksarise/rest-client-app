@@ -30,11 +30,11 @@ function Footer() {
           <span className="tooltip pb-2">React course</span>
           <Image
             style={{ width: '50px', height: '50px' }}
-            src="/react.svg"
+            src="/rss-logo.svg"
             width={50}
             height={50}
-            alt="react-logo"
-            className="react-logo m-auto"
+            alt="rsschool-logo"
+            className="m-auto"
           />
         </a>
       </nav>

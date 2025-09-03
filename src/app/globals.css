@@ -1,7 +1,4 @@
 @import 'tailwindcss';
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 @plugin "daisyui" {
   themes: night --default;
 }
@@ -37,14 +34,16 @@
 
 .react-logo,
 .github-logo,
-.profile-card {
+.profile-card,
+.image-404 {
   will-change: filter;
   transition: filter 300ms;
 }
 
 .react-logo:hover,
 .github-logo:hover,
-.profile-card:hover {
+.profile-card:hover,
+.image-404:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 

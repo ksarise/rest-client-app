@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Page() {
   return (
-    <div className="page-404 bg-base-300 flex h-screen flex-col items-center justify-start gap-10 pt-10 pb-5">
+    <div className="page-404 bg-base-300 flex h-full flex-col items-center justify-center gap-10 pt-10 pb-10">
       <Image
         src="/404.png"
         width={300}

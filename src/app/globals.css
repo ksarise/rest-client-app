@@ -37,30 +37,32 @@
 
 .react-logo,
 .github-logo,
-.profile-card,
-.image-404 {
+.profile-card {
   will-change: filter;
   transition: filter 300ms;
 }
 
 .react-logo:hover,
 .github-logo:hover,
-.profile-card:hover,
-.image-404:hover {
+.profile-card:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes filter-animation {
+  0% {
+    filter: drop-shadow(0 0 4em #646cffaa);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    filter: drop-shadow(0 0 4em #ffffff00);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 4em #646cffaa);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .react-logo {
-    animation: logo-spin infinite 20s linear;
+  .image-404 {
+    animation: filter-animation infinite 5s linear;
   }
 }

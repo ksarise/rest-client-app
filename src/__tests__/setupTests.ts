@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 import '@testing-library/jest-dom/vitest'
-import type { Auth, User, UserCredential, Unsubscribe } from 'firebase/auth'
+import type { Auth, User, UserCredential } from 'firebase/auth'
 
 vi.mock('firebase/app', () => {
   class FirebaseError extends Error {
@@ -18,34 +18,51 @@ vi.mock('firebase/app', () => {
   }
 })
 
-
 vi.mock('firebase/auth', () => {
+  type Unsub = () => void
+  const unsub: Unsub = () => {}
   return {
     getAuth: vi.fn((): Auth => ({} as Auth)),
-    onAuthStateChanged: vi.fn((a: Auth, cb: (u: User | null) => void): Unsubscribe => {
+    onAuthStateChanged: vi.fn((a: Auth, cb: (u: User | null) => void): Unsub => {
       void a
       cb(null)
-      return () => {}
+      return unsub
     }),
+    onIdTokenChanged: vi.fn(
+      (a: Auth, observer: ((u: User | null) => void) | { next?: (u: User | null) => void }): Unsub => {
+        void a
+        if (typeof observer === 'function') observer(null)
+        else observer?.next?.(null)
+        return unsub
+      }
+    ),
     signOut: vi.fn((a: Auth): Promise<void> => {
       void a
       return Promise.resolve()
     }),
-    signInWithEmailAndPassword: vi.fn((a: Auth, email: string, password: string): Promise<UserCredential> => {
-      void a; void email; void password
-      return Promise.resolve({} as unknown as UserCredential)
-    }),
-    createUserWithEmailAndPassword: vi.fn((a: Auth, email: string, password: string): Promise<UserCredential> => {
-      void a; void email; void password
-      return Promise.resolve({} as unknown as UserCredential)
-    }),
+    signInWithEmailAndPassword: vi.fn(
+      (a: Auth, email: string, password: string): Promise<UserCredential> => {
+        void a
+        void email
+        void password
+        return Promise.resolve({} as unknown as UserCredential)
+      }
+    ),
+    createUserWithEmailAndPassword: vi.fn(
+      (a: Auth, email: string, password: string): Promise<UserCredential> => {
+        void a
+        void email
+        void password
+        return Promise.resolve({} as unknown as UserCredential)
+      }
+    ),
     sendPasswordResetEmail: vi.fn((a: Auth, email: string): Promise<void> => {
-      void a; void email
+      void a
+      void email
       return Promise.resolve()
     }),
   }
 })
-
 
 vi.mock('next/navigation', () => {
   const router = {
@@ -57,7 +74,7 @@ vi.mock('next/navigation', () => {
     refresh: vi.fn(),
   }
   return {
-    useRouter: () => router,        
+    useRouter: () => router,
     usePathname: () => '/',
     useSearchParams: () => new URLSearchParams(),
     redirect: vi.fn(),

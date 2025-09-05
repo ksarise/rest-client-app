@@ -8,24 +8,13 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthState
 import { FirebaseError } from 'firebase/app'
 import { auth } from '@/lib/firebase'
 import { useRouter } from 'next/navigation'
+import { PASSWORD_RE, mapAuthErr } from '@/constants/auth'
 
-const passwordRe = /^(?=.*\p{L})(?=.*\d)(?=.*[^\p{L}\d\s]).{8,}$/u
 const schema = z.object({
   email: z.string().email(),
-  password: z.string().regex(passwordRe, 'Min 8, 1 letter, 1 digit, 1 special'),
+  password: z.string().regex(PASSWORD_RE, 'Min 8, 1 letter, 1 digit, 1 special'),
 })
 type FormData = z.infer<typeof schema>
-
-const mapAuthErr = (code: string) =>
-  ({
-    'auth/invalid-credential': 'Email or password is incorrect.',
-    'auth/too-many-requests': 'Too many attempts. Try again later.',
-    'auth/network-request-failed': 'Network error. Check your connection.',
-    'auth/user-disabled': 'This account is disabled.',
-    'auth/user-not-found': 'No account found for this email.',
-    'auth/wrong-password': 'Email or password is incorrect.',
-    'auth/invalid-email': 'Email format is invalid.',
-  }[code] ?? 'Authentication error')
 
 export default function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
   const router = useRouter()
@@ -48,10 +37,7 @@ export default function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
   }, [router])
 
   const title = useMemo(() => (mode === 'sign-in' ? 'Sign In' : 'Sign Up'), [mode])
-  const btnLabel = useMemo(() => {
-    if (!isSubmitting) return title
-    return mode === 'sign-in' ? 'Signing in…' : 'Creating account…'
-  }, [isSubmitting, mode, title])
+  const btnLabel = useMemo(() => (!isSubmitting ? title : mode === 'sign-in' ? 'Signing in…' : 'Creating account…'), [isSubmitting, mode, title])
 
   async function onSubmit(data: FormData) {
     setSubmitError(null)

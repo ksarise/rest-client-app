@@ -10,14 +10,21 @@ describe('LanguageSwitcher', () => {
     try { localStorage.removeItem('i18nextLng') } catch (_e) { void _e }
   })
 
-  it('toggles language EN <-> RU', () => {
+  it('toggles language EN <-> RU', async () => {
     renderWithI18n(<LanguageSwitcher />)
-    const btnEN = screen.getByRole('button', { name: 'EN' })
-    const btnRU = screen.getByRole('button', { name: 'RU' })
+
+    const triggerEn = screen.getByRole('button', { name: /en/i })
     expect(i18n.language).toMatch(/^en/)
-    fireEvent.click(btnRU)
+
+    fireEvent.click(triggerEn)
+    const ruOption = await screen.findByRole('option', { name: /ru/i })
+    fireEvent.click(ruOption)
     expect(i18n.language).toMatch(/^ru/)
-    fireEvent.click(btnEN)
+
+    const triggerRu = screen.getByRole('button', { name: /ru/i })
+    fireEvent.click(triggerRu)
+    const enOption = await screen.findByRole('option', { name: /en/i })
+    fireEvent.click(enOption)
     expect(i18n.language).toMatch(/^en/)
   })
 })

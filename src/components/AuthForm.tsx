@@ -121,7 +121,7 @@ export default function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
             />
             <button
               type="button"
-              className="btn btn-ghost"
+              className="btn btn-ghost rounded-sm"
               onClick={() => setPasswordHidden(v => !v)}
               aria-label={passwordHidden ? 'show password' : 'hide password'}
             >
@@ -138,7 +138,7 @@ export default function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
         <button
           type="submit"
           disabled={!isValid || isSubmitting}
-          className="btn btn-primary w-full disabled:opacity-50"
+          className="btn btn-primary rounded-sm w-full disabled:opacity-50"
           aria-busy={isSubmitting}
           aria-label={mode === 'sign-in' ? 'sign in' : 'sign up'}
         >
